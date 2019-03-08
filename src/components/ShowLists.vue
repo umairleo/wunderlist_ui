@@ -2,9 +2,16 @@
   <div>    
     <div class="col-xs-4">
     <h3>Lists</h3>
-      <ul class="list-group" v-for="list in lists" :key="list.id">
-      <li class="list-group-item">{{ list.name }}</li>
+      <ul class="list-group" >
+    
+      <li class="list-group-item" v-for="list in lists "  :key="list.id" >
+        {{ list.name }} {{list.list_id}}<br>
+        <a class="button is-primary" @click.submit="addTask()"> Add task    </a> 
+       
+         <a class="button is-primary" @click="taskList(list)"> Task List
+                        </a></li> 
           </ul>
+
     </div>
   </div>
 </template>
@@ -14,10 +21,25 @@ export default {
   name: "ShowLists",
   data() {
     return {
-      lists: []
+      lists: [],
+      task: {
+
+      },
+      tasks: []
     };
   },
   methods: {
+    taskList(list){
+     this.tasks = list.data;
+    },
+    addTask: function(event){
+      event.preventDefault();
+     if (this.tasks.name !== '' && this.tasks.name !==undefined){
+       this.tasks.push({
+         name: this.tasks.name
+       })
+     }
+    },
     getAllLists() {
       var headers = {
         headers: {

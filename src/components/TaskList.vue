@@ -1,7 +1,7 @@
 <template >
 <div class="col-xs-8">
 <h3>Tasks</h3>
-<ul class="list-group" v-for="task in tasks" :key="task.list_id" >{{list.id}}
+<ul class="list-group" v-for="task in tasks" :key="task.id" >
 <li class="list-group-item">{{ task.name }}</li>
 </ul>
 </div>
@@ -23,9 +23,9 @@ export default {
         }
       };
       this.$http
-        .get("http://localhost:3000/lists/:list_id/tasks",{}, headers)
+        .get("http://localhost:3000/lists/:list_id/tasks", {}, headers)
         .then(res => {
-          console.log(res);
+         console.log(res);
        this.tasks = res.data;
         })
         .catch(() => {});
